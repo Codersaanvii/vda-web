@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { CONTACT_DETAILS } from "@/lib/constants";
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -140,7 +141,9 @@ export default function Hero() {
             variants={fadeUpVariants}
           >
             <Link
-              href="/contact"
+              href={CONTACT_DETAILS.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-sans font-medium uppercase tracking-[0.2em] text-white hover:text-yellow transition-colors duration-300"
             >
               <span>Start Your Design Journey</span>
