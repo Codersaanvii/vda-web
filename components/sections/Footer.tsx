@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col gap-12">
         
         {/* 4-column contact bar with hairline dividers */}
-        <div className="grid grid-cols-1 md:grid-cols-4 border-y border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-3 border-y border-white/10">
           
           {/* Column 1: Write To Us */}
           <div className="border-b border-white/10 md:border-b-0 md:border-r last:border-b-0 md:last:border-r-0 p-6 md:p-8 flex flex-col gap-4">
@@ -37,21 +37,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Column 3: Careers */}
-          <div className="border-b border-white/10 md:border-b-0 md:border-r last:border-b-0 md:last:border-r-0 p-6 md:p-8 flex flex-col gap-4">
-            <h4 className="text-[10px] tracking-[0.25em] uppercase text-white/50 font-sans font-medium">
-              Careers
-            </h4>
-            <p className="text-xs font-sans font-light text-grey-light/60 leading-relaxed">
-              Please submit your CV and portfolio to:
-            </p>
-            <a
-              href="mailto:careers@vdaarchitects.com"
-              className="text-xs font-sans font-light text-white hover:text-yellow transition-colors duration-300 w-fit"
-            >
-              careers@vdaarchitects.com
-            </a>
-          </div>
+
 
           {/* Column 4: Socials */}
           <div className="border-b border-white/10 md:border-b-0 md:border-r last:border-b-0 md:last:border-r-0 p-6 md:p-8 flex flex-col gap-4">
