@@ -110,7 +110,7 @@ function CarouselCard({
       onFocus={() => focusCard(idx)}
       onKeyDown={(e) => handleKeyDown(e, idx)}
       onClick={() => handleCardClick(idx)}
-      className="absolute w-[320px] xl:w-[380px] aspect-[3/4] outline-none group"
+      className="absolute w-[380px] aspect-[3/4] outline-none group"
       style={{
         x,
         rotateY,
@@ -310,7 +310,7 @@ export default function ProjectsMosaic() {
           </div>
 
           {/* Concave Arc / Coverflow 3D Carousel Track */}
-          <div className="w-full flex-grow flex items-center justify-center relative overflow-hidden mt-6 mb-12 pb-6">
+          <div className="w-full flex-grow flex items-center justify-center relative overflow-visible mt-6 mb-16 pb-12">
             <motion.div
               drag="x"
               dragElastic={0.15}
@@ -332,7 +332,7 @@ export default function ProjectsMosaic() {
                 const nearestIdx = Math.round(mvCenterIndex.get());
                 syncScrollToIdx(nearestIdx);
               }}
-              className="relative w-full h-[500px] xl:h-[580px] flex items-center justify-center cursor-grab active:cursor-grabbing"
+              className="relative w-full h-[550px] xl:h-[600px] flex items-center justify-center cursor-grab active:cursor-grabbing"
               style={{ perspective: 1200, transformStyle: "preserve-3d" }}
             >
               {scatteredItems.map((item, idx) => (
