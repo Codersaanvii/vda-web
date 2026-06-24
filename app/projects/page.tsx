@@ -50,7 +50,7 @@ const projects = [
     number: "05",
     title: "Retail & Showrooms",
     description: "Aesthetically striking retail spaces and product showrooms combining custom millwork, thematic lighting, and brand storytelling.",
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop",
+    image: "/images/projects/retail-showroom.png",
     slug: "retail-showrooms",
     aspectRatio: "aspect-[3/4.2]",
   },
