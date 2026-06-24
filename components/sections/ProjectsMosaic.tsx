@@ -110,7 +110,7 @@ function CarouselCard({
       onFocus={() => focusCard(idx)}
       onKeyDown={(e) => handleKeyDown(e, idx)}
       onClick={() => handleCardClick(idx)}
-      className="absolute w-[220px] xl:w-[260px] aspect-[3/4] outline-none group"
+      className="absolute w-[320px] xl:w-[380px] aspect-[3/4] outline-none group"
       style={{
         x,
         rotateY,
@@ -121,7 +121,7 @@ function CarouselCard({
       }}
     >
       {/* Polaroid Backing Layout */}
-      <div className="relative w-full h-full bg-white p-2.5 pb-12 border border-grey-light/20 shadow-[0_4px_16px_rgba(0,0,0,0.04)] rounded-xs flex flex-col justify-between cursor-pointer transition-shadow duration-500 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
+      <div className="relative w-full h-full bg-white p-2.5 pb-16 border border-grey-light/20 shadow-[0_4px_16px_rgba(0,0,0,0.04)] rounded-xs flex flex-col justify-between cursor-pointer transition-shadow duration-500 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
         <div className="relative w-full flex-grow overflow-hidden bg-charcoal">
           <motion.img
             src={item.image}
@@ -134,7 +134,7 @@ function CarouselCard({
         {/* Caption label - rotates naturally with card, fades out when unfocused */}
         <motion.div
           style={{ opacity: captionOpacity }}
-          className="absolute bottom-3 left-0 right-0 text-center px-3"
+          className="absolute bottom-4 left-0 right-0 text-center px-3"
         >
           <span className="text-[10px] xl:text-[11px] font-sans font-semibold uppercase tracking-[0.12em] text-black">
             {item.title}
@@ -310,7 +310,7 @@ export default function ProjectsMosaic() {
           </div>
 
           {/* Concave Arc / Coverflow 3D Carousel Track */}
-          <div className="w-full flex-grow flex items-center justify-center relative overflow-hidden my-6">
+          <div className="w-full flex-grow flex items-center justify-center relative overflow-hidden mt-6 mb-12 pb-6">
             <motion.div
               drag="x"
               dragElastic={0.15}
@@ -332,7 +332,7 @@ export default function ProjectsMosaic() {
                 const nearestIdx = Math.round(mvCenterIndex.get());
                 syncScrollToIdx(nearestIdx);
               }}
-              className="relative w-full h-[360px] xl:h-[400px] flex items-center justify-center cursor-grab active:cursor-grabbing"
+              className="relative w-full h-[500px] xl:h-[580px] flex items-center justify-center cursor-grab active:cursor-grabbing"
               style={{ perspective: 1200, transformStyle: "preserve-3d" }}
             >
               {scatteredItems.map((item, idx) => (
