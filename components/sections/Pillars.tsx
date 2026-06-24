@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { PILLARS } from "@/lib/constants";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+
 
 // Accompanying local images matching the editorial mood
 const pillarImages = [
@@ -41,16 +41,6 @@ export default function Pillars() {
     return () => window.removeEventListener("resize", checkDevice);
   }, [shouldReduceMotion]);
 
-  // Native snap scroll manual arrow controls
-  const scrollNative = (direction: "left" | "right") => {
-    if (nativeScrollRef.current) {
-      const scrollAmount = window.innerWidth * 0.7;
-      nativeScrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
 
   return (
     <div
@@ -138,8 +128,8 @@ export default function Pillars() {
         <div className="py-24 md:py-32 border-b border-grey-light/30 overflow-hidden">
           <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
             
-            {/* Header with Arrow buttons for manual scroll */}
-            <div className="flex justify-between items-end mb-12">
+            {/* Header */}
+            <div className="mb-12">
               <div className="max-w-xl">
                 <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.22em] uppercase font-sans font-medium text-grey/85">
                   <span className="w-1.5 h-1.5 bg-yellow shrink-0" />
@@ -148,24 +138,6 @@ export default function Pillars() {
                 <h2 className="text-4xl md:text-5xl font-serif font-light tracking-[-0.03em] leading-tight text-black">
                   Design Philosophy
                 </h2>
-              </div>
-              
-              {/* Fallback buttons */}
-              <div className="flex gap-4">
-                <button
-                  onClick={() => scrollNative("left")}
-                  className="w-10 h-10 border border-grey-light hover:border-black flex items-center justify-center transition-colors focus:outline-none"
-                  aria-label="Previous slide"
-                >
-                  <ArrowLeft size={16} />
-                </button>
-                <button
-                  onClick={() => scrollNative("right")}
-                  className="w-10 h-10 border border-grey-light hover:border-black flex items-center justify-center transition-colors focus:outline-none"
-                  aria-label="Next slide"
-                >
-                  <ArrowRight size={16} />
-                </button>
               </div>
             </div>
 
