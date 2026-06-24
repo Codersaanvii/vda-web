@@ -30,7 +30,7 @@ const scatteredItems = [
   },
   {
     title: "Retail & Showrooms",
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop",
+    image: "/images/projects/retail-showroom.png",
     slug: "retail-showrooms",
   },
   {
