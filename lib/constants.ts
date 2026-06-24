@@ -195,8 +195,9 @@ export const VISION_MISSION = {
 export const CONTACT_DETAILS = {
   address: "CBD Belapur, Navi Mumbai, Maharashtra, India",
   email: "info@vdaarchitects.com",
-  phone: "+91 22 2757 0000",
-  whatsapp: "https://wa.me/919876543210", // Replace with your actual WhatsApp business number
+  phone: "+91 83694 85704",
+  whatsapp: "https://wa.me/918369485704",
+  instagram: "https://www.instagram.com/wearevda/",
   website: "www.vdaarchitects.com",
   hours: "Mon - Sat: 9:30 AM - 6:30 PM",
 };

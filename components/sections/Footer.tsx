@@ -1,4 +1,5 @@
 import React from "react";
+import { CONTACT_DETAILS } from "@/lib/constants";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -58,9 +59,11 @@ export default function Footer() {
               Socials
             </h4>
             <div className="flex flex-col gap-2">
-              {/* // TODO: add VDA social URLs */}
+              {/* Socials */}
               <a
-                href="#"
+                href={CONTACT_DETAILS.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-xs font-sans font-light text-grey-light/60 hover:text-yellow transition-colors duration-300 w-fit"
               >
                 Instagram ↗
