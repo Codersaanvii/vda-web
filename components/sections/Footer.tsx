@@ -55,7 +55,9 @@ export default function Footer() {
                 Instagram ↗
               </a>
               <a
-                href="#"
+                href={CONTACT_DETAILS.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-xs font-sans font-light text-grey-light/60 hover:text-yellow transition-colors duration-300 w-fit"
               >
                 LinkedIn ↗

@@ -198,6 +198,7 @@ export const CONTACT_DETAILS = {
   phone: "+91 83694 85704",
   whatsapp: "https://wa.me/918369485704",
   instagram: "https://www.instagram.com/wearevda/",
+  linkedin: "https://www.linkedin.com/company/vdadesigns/",
   website: "www.vdaarchitects.com",
   hours: "Mon - Sat: 9:30 AM - 6:30 PM",
 };
