@@ -226,7 +226,7 @@ export const TEAM: TeamMember[] = [
     imageSearch: "/images/team/Design Executive(1).png",
   },
   {
-    name: "Id. Bhagyashree",
+    name: "Id. Bhagyashree Waghmode",
     role: "Design Executive",
     imageSearch: "/images/team/Design Executive(2).png",
   },
@@ -241,7 +241,7 @@ export const TEAM: TeamMember[] = [
     imageSearch: "/images/team/HR & Admin.png",
   },
   {
-    name: "Jayvant",
+    name: "Jayvant Gurav",
     role: "Office Assistant",
     imageSearch: "/images/team/Office Assistant.png",
   },
