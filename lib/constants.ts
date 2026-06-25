@@ -217,7 +217,7 @@ export const TEAM: TeamMember[] = [
   },
   {
     name: "Ar. Mitalee Chavan",
-    role: "Senior Design Executive",
+    role: "Design Executive",
     imageSearch: "/images/team/Design Executive(1).png",
   },
   {
