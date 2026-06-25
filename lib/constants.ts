@@ -193,7 +193,7 @@ export const VISION_MISSION = {
 };
 
 export const CONTACT_DETAILS = {
-  address: "CBD Belapur, Navi Mumbai, Maharashtra, India",
+  address: "702, Raheja Arcade, Sector 11, CBD Belapur, Navi Mumbai, Maharashtra, India",
   email: "info@vdaarchitects.com",
   phone: "+91 83694 85704",
   whatsapp: "https://wa.me/918369485704",
