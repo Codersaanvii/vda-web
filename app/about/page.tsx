@@ -58,7 +58,7 @@ export default function About() {
                     We start every project the same way — by understanding the space, not styling it. Before any design takes shape, we look closely at how people will actually move through it, how departments connect, what needs quiet and what doesn't, and how the building's own systems will shape what's possible. That groundwork is what makes the difference between a space that looks good and one that actually works — whether it's a corporate headquarters, a bank branch, or a research lab.                  </p>
                   <blockquote className="border-l border-yellow pl-6 my-4">
                     <p className="font-serif text-lg md:text-xl font-light italic text-black leading-relaxed">
-                      &ldquo;We value your space. From square foot to square inch.&rdquo;
+                      &ldquo;We value your space — from square foot to square inch. Every corner is an asset that must contribute to performance and well-being. If it doesn't, it doesn't belong.&rdquo;
                     </p>
                     <cite className="block text-[10px] font-sans font-light uppercase tracking-[0.2em] text-grey/50 mt-3 not-italic">
                       — Vinay Desai, Founder

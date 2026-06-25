@@ -60,7 +60,7 @@ export default function Services() {
           
           <div className="relative z-10 flex flex-col items-center gap-6">
             <h2 className="font-serif text-3xl md:text-4xl font-light text-black tracking-tight">
-              Need a Function-Led Layout for Your Office?
+              Need a Function-Led Layout for Your Workplace?
             </h2>
             <p className="text-sm md:text-base font-sans font-light text-black/75 max-w-sm mx-auto leading-relaxed">
               Book a consulting session to audit your current workspace flow and departments layout.

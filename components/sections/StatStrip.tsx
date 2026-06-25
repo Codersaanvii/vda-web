@@ -8,8 +8,8 @@ export default function StatStrip() {
   return (
     <section className="bg-charcoal text-white py-12 md:py-16 border-b border-black relative overflow-hidden select-none">
       <div className="max-w-[1400px] w-full mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0">
-        
-        {/* Stat 1 */}
+
+        {/* Stat  1 */}
         <div className="flex-1 flex flex-col items-center text-center">
           <StatBlock
             value={STATS[0].value}

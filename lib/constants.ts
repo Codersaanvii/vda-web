@@ -200,7 +200,7 @@ export const CONTACT_DETAILS = {
   instagram: "https://www.instagram.com/wearevda/",
   linkedin: "https://www.linkedin.com/company/vdadesigns/",
   website: "www.vdaarchitects.com",
-  hours: "Mon - Sat: 9:30 AM - 6:30 PM",
+  hours: "Monday to Friday 10:00-5:00",
 };
 
 export interface TeamMember {

@@ -103,7 +103,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className={`${labelClass} mb-2`}>
-                      Business Hours
+                      Visiting Hours
                     </h4>
                     <p className="text-sm font-sans font-light text-grey">
                       {CONTACT_DETAILS.hours}
