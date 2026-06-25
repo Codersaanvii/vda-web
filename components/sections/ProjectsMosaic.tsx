@@ -156,9 +156,9 @@ export default function ProjectsMosaic() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const wheelTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  // Scroll and animation state refs
+  // Scroll state refs
   const currentIndexRef = useRef(0);
-  const isAnimatingRef = useRef(false);
+  const accumulatedDeltaRef = useRef(0);
 
   // Drag interaction refs
   const isDragging = useRef(false);
@@ -183,34 +183,47 @@ export default function ProjectsMosaic() {
   useEffect(() => {
     const handleWindowWheel = (e: WheelEvent) => {
       if (isHoveredRef.current && useDesktopScroll && carouselRef.current?.contains(e.target as Node)) {
-        if (isAnimatingRef.current) {
-          e.preventDefault();
-          e.stopPropagation();
+        const delta = e.deltaY;
+        if (delta === 0) return;
+
+        const isScrollingDown = delta > 0;
+
+        // If at boundaries and trying to scroll out, allow default page scroll
+        if (currentIndexRef.current === 0 && !isScrollingDown) {
+          accumulatedDeltaRef.current = 0;
+          return;
+        }
+        if (currentIndexRef.current === scatteredItems.length - 1 && isScrollingDown) {
+          accumulatedDeltaRef.current = 0;
           return;
         }
 
-        const delta = e.deltaY;
-        // Ignore tiny accidental wheel/trackpad ticks
-        if (Math.abs(delta) < 15) return;
+        // Hijack scroll
+        e.preventDefault();
+        e.stopPropagation();
 
-        const direction = delta > 0 ? 1 : -1;
-        const nextIdx = currentIndexRef.current + direction;
+        accumulatedDeltaRef.current += delta;
 
-        if (nextIdx >= 0 && nextIdx <= scatteredItems.length - 1) {
-          e.preventDefault();
-          e.stopPropagation();
-
-          currentIndexRef.current = nextIdx;
-          isAnimatingRef.current = true;
-
-          animate(mvCenterIndex, nextIdx, {
-            type: "spring",
-            stiffness: 120,
-            damping: 18,
-            onComplete: () => {
-              isAnimatingRef.current = false;
-            },
-          });
+        // Fire when threshold is reached (smooth scrolling multi-step)
+        if (Math.abs(accumulatedDeltaRef.current) > 40) {
+          const steps = Math.trunc(accumulatedDeltaRef.current / 40);
+          
+          let nextIdx = currentIndexRef.current + steps;
+          // Clamp
+          nextIdx = Math.max(0, Math.min(nextIdx, scatteredItems.length - 1));
+          
+          if (nextIdx !== currentIndexRef.current) {
+            currentIndexRef.current = nextIdx;
+            
+            animate(mvCenterIndex, nextIdx, {
+              type: "spring",
+              stiffness: 140,
+              damping: 22,
+            });
+          }
+          
+          // Keep the remainder
+          accumulatedDeltaRef.current = accumulatedDeltaRef.current % 40;
         }
       }
     };
