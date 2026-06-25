@@ -32,19 +32,19 @@ export default function About() {
         {/* Detail Story Section with asymmetric layout */}
         <section className="bg-white py-32 md:py-40 border-b border-grey-light/30 relative overflow-hidden">
           <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
               <div className="lg:col-span-5 relative h-[380px] sm:h-[480px] lg:h-[600px] w-full bg-off-white overflow-hidden">
                 {/* TODO: replace with VDA project photography */}
                 <Image
-                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop"
+                  src="/images/general/about-story.png"
                   alt="VDA Design Studio Workspace"
                   fill
                   className="object-cover image-blend"
                 />
               </div>
 
-              <div className="lg:col-span-7 flex flex-col gap-8 lg:-mt-1.5">
+              <div className="lg:col-span-7 flex flex-col gap-8">
                 <SectionHeading
                   eyebrow="Our Journey"
                   heading="Two Decades of Refinement"
@@ -53,14 +53,12 @@ export default function About() {
 
                 <div className="flex flex-col gap-6 text-[15px] sm:text-base font-sans font-light text-grey leading-[1.65]">
                   <p>
-                    VDA was established in Navi Mumbai with a single founding conviction: that commercial interior design must be function-led. An office is not simply an exercise in styling; it is an organizational tool that influences workflow, staff engagement, and operational output.
-                  </p>
+                    VDA started in Navi Mumbai with one clear belief: commercial interior design should focus on function first. An office is more than just its appearance; it shapes how people work, connect, and get things done.                  </p>
                   <p>
-                    From corporate headquarters to banking branches and research labs, we approach each project with rigorous analysis. We study circulation, spatial adjacencies, acoustic isolation, and building mechanical systems before pencil ever meets paper.
-                  </p>
+                    We start every project the same way — by understanding the space, not styling it. Before any design takes shape, we look closely at how people will actually move through it, how departments connect, what needs quiet and what doesn't, and how the building's own systems will shape what's possible. That groundwork is what makes the difference between a space that looks good and one that actually works — whether it's a corporate headquarters, a bank branch, or a research lab.                  </p>
                   <blockquote className="border-l border-yellow pl-6 my-4">
                     <p className="font-serif text-lg md:text-xl font-light italic text-black leading-relaxed">
-                      &ldquo;We treat every square inch of space as an asset that must yield value. If a design element does not contribute to workflow or human comfort, it does not belong in the plan.&rdquo;
+                      &ldquo;Every square inch is valuable. If it doesn't add function or comfort, it doesn't belong in the plan.&rdquo;
                     </p>
                     <cite className="block text-[10px] font-sans font-light uppercase tracking-[0.2em] text-grey/50 mt-3 not-italic">
                       — Vinay Desai, Founder

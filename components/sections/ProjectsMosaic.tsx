@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { motion, useScroll, useTransform, useMotionValue, useReducedMotion, MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useReducedMotion, MotionValue, animate } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 // Carousel project card data with titles and images
@@ -14,7 +14,7 @@ const scatteredItems = [
     slug: "corporate-offices",
   },
   {
-    title: "IT & Technology Workspaces",
+    title: "IT Workspaces",
     image: "/images/projects/it-workspaces.png",
     slug: "it-technology",
   },
@@ -121,7 +121,7 @@ function CarouselCard({
       }}
     >
       {/* Polaroid Backing Layout */}
-      <div className="relative w-full h-full bg-white p-2.5 pb-16 border border-grey-light/20 shadow-[0_4px_16px_rgba(0,0,0,0.04)] rounded-xs flex flex-col justify-between cursor-pointer transition-shadow duration-500 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
+      <div className="relative w-full h-full bg-white p-2.5 pb-20 border border-grey-light/20 shadow-[0_4px_16px_rgba(0,0,0,0.04)] rounded-xs flex flex-col justify-between cursor-pointer transition-shadow duration-500 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
         <div className="relative w-full flex-grow overflow-hidden bg-charcoal">
           <motion.img
             src={item.image}
@@ -130,13 +130,13 @@ function CarouselCard({
             style={{ filter }}
           />
         </div>
-        
+
         {/* Caption label - rotates naturally with card, fades out when unfocused */}
         <motion.div
           style={{ opacity: captionOpacity }}
-          className="absolute bottom-4 left-0 right-0 text-center px-3"
+          className="absolute bottom-6 left-0 right-0 text-center px-3"
         >
-          <span className="text-[10px] xl:text-[11px] font-sans font-semibold uppercase tracking-[0.12em] text-black">
+          <span className="text-[16px] font-sans font-semibold uppercase tracking-[0.12em] text-[#0A0A0A]">
             {item.title}
           </span>
         </motion.div>
@@ -147,11 +147,18 @@ function CarouselCard({
 
 export default function ProjectsMosaic() {
   const router = useRouter();
-  const containerRef = useRef<HTMLDivElement>(null);
   const mobileScrollRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const [useDesktopScroll, setUseDesktopScroll] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const isHoveredRef = useRef(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const wheelTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  // Scroll and animation state refs
+  const currentIndexRef = useRef(0);
+  const isAnimatingRef = useRef(false);
 
   // Drag interaction refs
   const isDragging = useRef(false);
@@ -159,12 +166,6 @@ export default function ProjectsMosaic() {
 
   // MotionValue tracking the current center index (floating number from 0 to 5)
   const mvCenterIndex = useMotionValue(0);
-
-  // Scroll linkage for desktop sticky container
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
 
   // Check if screen supports desktop scroll and motion is not reduced
   useEffect(() => {
@@ -178,17 +179,76 @@ export default function ProjectsMosaic() {
     return () => window.removeEventListener("resize", checkDevice);
   }, [shouldReduceMotion]);
 
-  // Synchronize vertical scroll progress to horizontal carousel motion value
+  // Synchronize hover wheel events to horizontal carousel motion value
   useEffect(() => {
-    if (useDesktopScroll) {
-      const unsubscribe = scrollYProgress.on("change", (latest) => {
-        if (!isDragging.current) {
-          mvCenterIndex.set(latest * (scatteredItems.length - 1));
+    const handleWindowWheel = (e: WheelEvent) => {
+      if (isHoveredRef.current && useDesktopScroll && carouselRef.current?.contains(e.target as Node)) {
+        if (isAnimatingRef.current) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
         }
+
+        const delta = e.deltaY;
+        // Ignore tiny accidental wheel/trackpad ticks
+        if (Math.abs(delta) < 15) return;
+
+        const direction = delta > 0 ? 1 : -1;
+        const nextIdx = currentIndexRef.current + direction;
+
+        if (nextIdx >= 0 && nextIdx <= scatteredItems.length - 1) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          currentIndexRef.current = nextIdx;
+          isAnimatingRef.current = true;
+
+          animate(mvCenterIndex, nextIdx, {
+            type: "spring",
+            stiffness: 120,
+            damping: 18,
+            onComplete: () => {
+              isAnimatingRef.current = false;
+            },
+          });
+        }
+      }
+    };
+
+    const handleMouseEnterNative = () => {
+      isHoveredRef.current = true;
+      setIsHovered(true);
+    };
+
+    const handleMouseLeaveNative = () => {
+      isHoveredRef.current = false;
+      setIsHovered(false);
+      const nearestIdx = Math.round(mvCenterIndex.get());
+      currentIndexRef.current = nearestIdx;
+      animate(mvCenterIndex, nearestIdx, {
+        type: "spring",
+        stiffness: 150,
+        damping: 20,
       });
-      return () => unsubscribe();
+    };
+
+    const el = carouselRef.current;
+    if (el) {
+      el.addEventListener("mouseenter", handleMouseEnterNative);
+      el.addEventListener("mouseleave", handleMouseLeaveNative);
     }
-  }, [scrollYProgress, useDesktopScroll, mvCenterIndex]);
+
+    // Add capture listener to window to preempt Lenis/smooth-scroll bubble phase listeners
+    window.addEventListener("wheel", handleWindowWheel, { capture: true, passive: false });
+
+    return () => {
+      if (el) {
+        el.removeEventListener("mouseenter", handleMouseEnterNative);
+        el.removeEventListener("mouseleave", handleMouseLeaveNative);
+      }
+      window.removeEventListener("wheel", handleWindowWheel, { capture: true });
+    };
+  }, [useDesktopScroll, mvCenterIndex]);
 
   // Maintain activeIndex state synchronized with motion value for dots and labels
   useEffect(() => {
@@ -198,27 +258,15 @@ export default function ProjectsMosaic() {
     return () => unsubscribe();
   }, [mvCenterIndex]);
 
-  // Function to smoothly scroll the window to center a specific index
-  const syncScrollToIdx = (idx: number) => {
-    const container = containerRef.current;
-    if (container) {
-      const rect = container.getBoundingClientRect();
-      const absoluteTop = window.scrollY + rect.top;
-      // Scroll range is h-[250vh] - 100vh = 1.5 * viewport height
-      const scrollRange = window.innerHeight * 1.5;
-      const targetScrollY = absoluteTop + (idx / (scatteredItems.length - 1)) * scrollRange;
-      
-      window.scrollTo({
-        top: targetScrollY,
-        behavior: "smooth",
-      });
-    }
-  };
-
   // Unified function to focus and center a card
   const focusCard = (idx: number) => {
     if (useDesktopScroll) {
-      syncScrollToIdx(idx);
+      currentIndexRef.current = idx;
+      animate(mvCenterIndex, idx, {
+        type: "spring",
+        stiffness: 150,
+        damping: 20,
+      });
     } else {
       setActiveIndex(idx);
       const container = mobileScrollRef.current;
@@ -264,10 +312,10 @@ export default function ProjectsMosaic() {
     const containerWidth = container.offsetWidth;
     const scrollLeft = container.scrollLeft;
     const centerOfContainer = scrollLeft + containerWidth / 2;
-    
+
     let nearestIdx = 0;
     let minDiff = Infinity;
-    
+
     const children = container.children;
     for (let i = 0; i < children.length; i++) {
       const child = children[i] as HTMLElement;
@@ -278,21 +326,18 @@ export default function ProjectsMosaic() {
         nearestIdx = i;
       }
     }
-    
+
     if (nearestIdx !== activeIndex) {
       setActiveIndex(nearestIdx);
     }
   };
 
   return (
-    <div
-      ref={containerRef}
-      className={useDesktopScroll ? "relative h-[250vh] bg-white" : "relative bg-white"}
-    >
+    <div className="relative bg-white">
       {useDesktopScroll ? (
-        /* DESKTOP STICKY ARC CAROUSEL LAYOUT */
-        <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-between py-20 z-10 bg-white select-none">
-          
+        /* DESKTOP ARC CAROUSEL LAYOUT */
+        <div className="relative w-full overflow-hidden flex flex-col justify-between pt-16 pb-16 z-10 bg-white select-none">
+
           {/* Pinned Title Heading Section (Left-aligned per standard) */}
           <div className="max-w-[1400px] w-full mx-auto px-6 md:px-12 z-10 shrink-0">
             <div className="max-w-2xl text-left">
@@ -310,7 +355,10 @@ export default function ProjectsMosaic() {
           </div>
 
           {/* Concave Arc / Coverflow 3D Carousel Track */}
-          <div className="w-full flex-grow flex items-center justify-center relative overflow-visible mt-6 mb-16 pb-12">
+          <div
+            ref={carouselRef}
+            className="w-full flex-grow flex items-center justify-center relative overflow-visible mt-4 mb-8 pb-10"
+          >
             <motion.div
               drag="x"
               dragElastic={0.15}
@@ -330,9 +378,9 @@ export default function ProjectsMosaic() {
               onDragEnd={() => {
                 isDragging.current = false;
                 const nearestIdx = Math.round(mvCenterIndex.get());
-                syncScrollToIdx(nearestIdx);
+                focusCard(nearestIdx);
               }}
-              className="relative w-full h-[550px] xl:h-[600px] flex items-center justify-center cursor-grab active:cursor-grabbing"
+              className="relative w-full h-[515px] xl:h-[525px] flex items-center justify-center cursor-grab active:cursor-grabbing"
               style={{ perspective: 1200, transformStyle: "preserve-3d" }}
             >
               {scatteredItems.map((item, idx) => (
@@ -354,7 +402,7 @@ export default function ProjectsMosaic() {
             <span className="text-[9px] font-sans font-light tracking-[0.2em] text-grey/40 uppercase">
               SCROLL VERTICALLY OR DRAG HORIZONTALLY TO NAVIGATE
             </span>
-            
+
             {/* Dots */}
             <div className="flex gap-3">
               {scatteredItems.map((_, dotIdx) => (
@@ -381,7 +429,7 @@ export default function ProjectsMosaic() {
         /* ACCESSIBLE SWIPE & REDUCED MOTION LAYOUT */
         <div className="py-20 md:py-28 border-b border-grey-light/30 overflow-hidden bg-white">
           <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
-            
+
             {/* Left-aligned Title Heading */}
             <div className="max-w-2xl mb-12 text-left">
               <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.22em] uppercase font-sans font-medium text-grey/85">

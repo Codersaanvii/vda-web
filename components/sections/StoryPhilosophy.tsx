@@ -8,7 +8,7 @@ export default function StoryPhilosophy() {
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
+
           {/* Left Column: Image bleeding to the viewport edge */}
           <div className="lg:col-span-5 relative h-[380px] sm:h-[480px] lg:h-[600px] w-full lg:w-[calc(100%+3rem)] lg:-ml-12 xl:w-[calc(100%+6rem)] xl:-ml-24 overflow-hidden bg-black/40">
             {/* TODO: replace with VDA project photography */}
@@ -25,7 +25,7 @@ export default function StoryPhilosophy() {
 
           {/* Right Column: Off-center content with generous whitespace */}
           <div className="lg:col-span-6 lg:col-start-7 flex flex-col gap-8 max-w-xl">
-            
+
             {/* Eyebrow and Subline */}
             <div>
               <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.22em] uppercase font-sans font-medium text-grey-light/60">
@@ -33,7 +33,7 @@ export default function StoryPhilosophy() {
                 <span>Our Story</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-serif font-light text-white tracking-tight leading-snug">
-                Strategic Workplace & Commercial Interior Design
+                Workplace & Commercial Interior Design
               </h2>
               <p className="text-[10px] font-sans font-light uppercase tracking-[0.2em] text-grey-light/40 mt-3 select-none">
                 Founded by Vinay Desai · 2000
@@ -48,8 +48,7 @@ export default function StoryPhilosophy() {
             </blockquote>
 
             <p className="text-[15px] sm:text-base font-sans font-light text-grey-light/65 leading-relaxed max-w-[55ch]">
-              We help organizations create workplaces that perform. From workspace strategy and layout planning to final completion, we ensure design intent matches built reality. By aligning physical workspaces with business goals, we help unlock collaboration, efficiency, and cultural value.
-            </p>
+              We help organisations create high-performing workplaces. From strategy and layout planning to completion, we ensure the design intent is fully realised. By aligning workspaces with business goals, we foster collaboration, efficiency, and a strong organisational culture.            </p>
 
             <div className="pt-2">
               <Button href="/about" variant="text-link-yellow">

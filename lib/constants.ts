@@ -31,19 +31,19 @@ export interface Industry {
 }
 
 export const INDUSTRIES: Industry[] = [
-  { name: "Banking & Financial Institutions", iconName: "Building2" },
-  { name: "Builders & Developers", iconName: "HardHat" },
   { name: "Corporate & Professional Services", iconName: "Briefcase" },
-  { name: "Government & Public Sector", iconName: "Building" },
-  { name: "Healthcare & Diagnostic Services", iconName: "HeartPulse" },
-  { name: "Hospitality", iconName: "Utensils" },
-  { name: "IT & Technology Services", iconName: "Laptop" },
+  { name: "Banking & Financial Institutions", iconName: "Building2" },
   { name: "MNCs & Global Capability Centers", iconName: "Globe2" },
   { name: "MSMEs & SMEs", iconName: "Store" },
-  { name: "Pharma & Life Sciences", iconName: "Beaker" },
+  { name: "Government & Public Sector", iconName: "Building" },
+  { name: "IT Services", iconName: "Laptop" },
   { name: "Manufacturing & Industrial Enterprises", iconName: "Factory" },
-  { name: "Retail & Consumer Brands", iconName: "ShoppingBag" },
+  { name: "Builders & Developers", iconName: "HardHat" },
+  { name: "Pharma & Life Sciences", iconName: "Beaker" },
+  { name: "Healthcare & Diagnostic Services", iconName: "HeartPulse" },
   { name: "Wellness & Fitness", iconName: "Activity" },
+  { name: "Retail & Consumer Brands", iconName: "ShoppingBag" },
+  { name: "Hospitality", iconName: "Utensils" },
 ];
 
 export interface Pillar {
@@ -84,7 +84,7 @@ export const PROJECT_TYPES: ProjectType[] = [
     gridClass: "md:col-span-2 md:row-span-1",
   },
   {
-    title: "IT & Technology Workspaces",
+    title: "IT Workspaces",
     imageSearch: "technology workspace open plan",
     gridClass: "md:col-span-1 md:row-span-2",
   },
@@ -216,22 +216,22 @@ export const TEAM: TeamMember[] = [
     imageSearch: "/images/team/Principal Architect.png",
   },
   {
-    name: "AR.Mitalee Chavan",
+    name: "Ar. Mitalee Chavan",
     role: "Senior Design Executive",
     imageSearch: "/images/team/Design Executive(1).png",
   },
   {
-    name: "AR. Sayali Kurhekar",
+    name: "Ar. Sayali Kurhekar",
     role: "Design Executive",
     imageSearch: "/images/team/Design Executive.png",
   },
   {
-    name: "ID. Bhagyashree",
+    name: "Id. Bhagyashree",
     role: "Design Executive",
     imageSearch: "/images/team/Design Executive(2).png",
   },
   {
-    name: "ER. Sarvesh Pashte",
+    name: "Er. Sarvesh Pashte",
     role: "Site Coordinator",
     imageSearch: "/images/team/Site Coordinator.png",
   },
